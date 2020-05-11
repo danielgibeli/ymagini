@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Ymagi.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ymagi.Models;
 
 namespace Ymagi
 {
@@ -41,14 +42,21 @@ namespace Ymagi
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<YmagiContext>(options =>
+                    options.UseMySql(Configuration.GetConnectionString("YmagiContext"), builder =>
+                        builder.MigrationsAssembly("Ymagi")));
+
+            services.AddScoped<SeedingService>();                   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
                 app.UseDatabaseErrorPage();
             }
             else

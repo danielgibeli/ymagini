@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Ymagi.Data.Migrations
+namespace Ymagi.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class NovasEntidades : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

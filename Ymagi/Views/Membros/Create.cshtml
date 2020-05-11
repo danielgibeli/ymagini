@@ -1,0 +1,115 @@
+﻿@model YmagiWebMvc.Models.ViewModels.OscFormViewModel                       ;
+
+@{
+    ViewData["Title"] = "Cadastro de Voluntários";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Membro.Nome" class="control-label"></label>
+                <input asp-for="Membro.Nome" class="form-control" />
+                <span asp-validation-for="Membro.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Osc" class="control-label"></label>
+                <select asp-for="Membro.Osc" asp-items="@(new SelectList(Model.Oscs,"Id","Name"))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Cpf" class="control-label"></label>
+                <input asp-for="Membro.Cpf" class="form-control" />
+                <span asp-validation-for="Membro.Cpf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Rg" class="control-label"></label>
+                <input asp-for="Membro.Rg" class="form-control" />
+                <span asp-validation-for="Membro.Rg" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Telefone" class="control-label"></label>
+                <input asp-for="Membro.Telefone" class="form-control" />
+                <span asp-validation-for="Membro.Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Email" class="control-label"></label>
+                <input asp-for="Membro.Email" class="form-control" />
+                <span asp-validation-for="Membro.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Nascimento" class="control-label"></label>
+                <input asp-for="Membro.Nascimento" class="form-control" />
+                <span asp-validation-for="Membro.Nascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Sexo" class="control-label"></label>
+                <input asp-for="Membro.Sexo" class="form-control" />
+                <span asp-validation-for="Membro.Sexo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.EstadoCivil" class="control-label"></label>
+                <input asp-for="Membro.EstadoCivil" class="form-control" />
+                <span asp-validation-for="Membro.EstadoCivil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Filhos" class="control-label"></label>
+                <input asp-for="Membro.Filhos" class="form-control" />
+                <span asp-validation-for="Membro.Filhos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.DataCadastro" class="control-label"></label>
+                <input asp-for="Membro.DataCadastro" class="form-control" />
+                <span asp-validation-for="Membro.DataCadastro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Cep" class="control-label"></label>
+                <input asp-for="Membro.Cep" class="form-control" />
+                <span asp-validation-for="Membro.Cep" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Rua" class="control-label"></label>
+                <input asp-for="Membro.Rua" class="form-control" />
+                <span asp-validation-for="Membro.Rua" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Numero" class="control-label"></label>
+                <input asp-for="Membro.Numero" class="form-control" />
+                <span asp-validation-for="Membro.Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Complemento" class="control-label"></label>
+                <input asp-for="Membro.Complemento" class="form-control" />
+                <span asp-validation-for="Membro.Complemento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Bairro" class="control-label"></label>
+                <input asp-for="Membro.Bairro" class="form-control" />
+                <span asp-validation-for="Membro.Bairro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Cidade" class="control-label"></label>
+                <input asp-for="Membro.Cidade" class="form-control" />
+                <span asp-validation-for="Membro.Cidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Membro.Estado" class="control-label"></label>
+                <input asp-for="Membro.Estado" class="form-control" />
+                <span asp-validation-for="Membro.Estado" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-info" />
+                <a asp-action="Index" class="btn btn-info">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

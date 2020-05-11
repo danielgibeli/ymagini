@@ -1,6 +1,6 @@
 using System;
 
-namespace Ymagi.Models
+namespace Ymagi.Models.ViewModels
 {
     public class ErrorViewModel
     {
