@@ -56,7 +56,10 @@ namespace Ymagi.Models
         public string Estado { get; set; }
         public Membro Membro { get; set; }
         public Osc Osc { get; set; }
-        
+        public int MembroId { get; set; }
+        public int OscId { get; set; }
+
+
         public ICollection<Entrega> Entregas { get; set; } = new List<Entrega>();
         public ICollection<Recebimento> Recebimentos { get; set; } = new List<Recebimento>();
 

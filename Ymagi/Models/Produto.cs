@@ -16,6 +16,8 @@ namespace Ymagi.Models
         public double ValorTotal { get; set; }
         public DateTime Date { get; set; }
         public Fornecedor Fornecedor { get; set; }
+        public int FornecedorId { get; set; }
+
 
 
         public Produto()

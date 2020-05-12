@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using Ymagi.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace YmagiWebMvc.Models.ViewModels
+namespace Ymagi.Models.ViewModels
 {
     public class OscFormViewModel
     {

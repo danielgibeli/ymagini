@@ -1,11 +1,12 @@
 ﻿@model Ymagi.Models.Fornecedor
 
 @{
-    ViewData["Title"] = "Editar fornecedor";
+    ViewData["Title"] = "Edit";
 }
 
-<h3>@ViewData["Title"]</h3>
+<h2>Edit</h2>
 
+<h4>Fornecedor</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -73,14 +74,14 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Voltar</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

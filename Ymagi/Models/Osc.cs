@@ -9,11 +9,11 @@ namespace Ymagi.Models
     public class Osc
     {
         public int Id { get; set; }
- 
+
         [Display(Name = "Razão Social")]
         public string RazaoSocial { get; set; }
 
-        [Display(Name = "Nome Fantasia")]
+        [Display(Name = "Nome Organização")]
         public string Nome { get; set; }
 
         [Display(Name = "CNPJ")]
@@ -52,8 +52,8 @@ namespace Ymagi.Models
         {
         }
 
-        public Osc(int id, string razaoSocial, string nome, string cnpj, string responsavel, 
-            string email, string telefone, string endereço, int numero, string complemento, 
+        public Osc(int id, string razaoSocial, string nome, string cnpj, string responsavel,
+            string email, string telefone, string endereço, int numero, string complemento,
             string bairro, string cidade, string estado, string contato, string observacao)
         {
             Id = id;

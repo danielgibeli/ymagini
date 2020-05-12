@@ -45,9 +45,9 @@ namespace Ymagi.Data
 
             Produto p1 = new Produto(1, "Arroz", "KG", 10, 10, 15, 15,new DateTime(1985, 07, 03), for1);
 
-            Entrega en = new Entrega(1, new DateTime(2020, 09, 05), 100, us1, mem1, 0);
+            Entrega en = new Entrega(1, new DateTime(2020, 09, 05), 100, us1, mem1, 0, 1, Models.Enums.DoacoesStatus.Cancelada);
 
-            Recebimento rec = new Recebimento(1, new DateTime(2020, 09, 05), for1, 200, us1, mem1, 0);
+            Recebimento rec = new Recebimento(1, new DateTime(2020, 09, 05), 200, us1, mem1,for1,1,2,1, Models.Enums.DoacoesStatus.Efetivada);
 
             _context.Osc.AddRange(osc1);
             _context.Membro.AddRange(mem1);

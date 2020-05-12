@@ -53,7 +53,7 @@ namespace Ymagi.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Membro membro)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Rg,Telefone,Email,Nascimento,Sexo,EstadoCivil,Filhos,DataCadastro,Cep,Rua,Numero,Complemento,Bairro,Cidade,Estado")] Membro membro)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Ymagi.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Membro membro)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Cpf,Rg,Telefone,Email,Nascimento,Sexo,EstadoCivil,Filhos,DataCadastro,Cep,Rua,Numero,Complemento,Bairro,Cidade,Estado")] Membro membro)
         {
             if (id != membro.Id)
             {

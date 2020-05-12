@@ -1,11 +1,5 @@
 ﻿@model IEnumerable<Ymagi.Models.Osc>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h2>Index</h2>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -19,7 +13,7 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cnpj)   
+                @Html.DisplayNameFor(model => model.Cnpj)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Responsavel)
@@ -58,54 +52,56 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RazaoSocial)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Responsavel)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telefone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Endereço)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Numero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Complemento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bairro)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Contato)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Observacao)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RazaoSocial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cnpj)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Responsavel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereço)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Complemento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observacao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

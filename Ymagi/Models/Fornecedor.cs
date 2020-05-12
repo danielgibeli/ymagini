@@ -10,19 +10,14 @@ namespace Ymagi.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Razão Social")]
         public string RazaoSocial { get; set; }
 
-        [Display(Name = "Nome Fantasia")]
         public string NomeFantasia { get; set; }
 
-        [Display(Name = "CNPJ")]
         public string Cnpj { get; set; }
 
-        [Display(Name = "Endereço: Rua, Avenida, etc...")]
         public string Endereço { get; set; }
 
-        [Display(Name = "Número")]
         public int Numero { get; set; }
 
         public string Complemento { get; set; }
@@ -32,6 +27,9 @@ namespace Ymagi.Models
         public string Contato { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
+        public Membro Membro { get; set; }
+        public int MembroId { get; set; }
+
 
         public ICollection<Produto> Produtos { get; set; } = new List<Produto>();
 

@@ -10,47 +10,35 @@ namespace Ymagi.Models
         public int Id { get; set; }
         public string Nome { get; set; }
 
-        [Display(Name = "Número CPF")]
         public int Cpf { get; set; }
 
-        [Display(Name = "Número RG")]
         public int Rg { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatório")]
-        [DataType(DataType.PhoneNumber)]
         public int Telefone { get; set; }
 
         public string Email { get; set; }
 
-        [Display(Name = "Data de nascimento")]
-        [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
 
-        [Display(Name = "Homen ou Mulher?")]
         public string Sexo { get; set; }
 
 
-        [Display(Name = "Estado Civil")]
         public string EstadoCivil { get; set; }
 
-        [Display(Name = "Tem Filhos? Quantos?")]
         public int Filhos { get; set; }
 
-        [Display(Name = "Data de cadastro")]
-        [DataType(DataType.Date)]
         public DateTime DataCadastro { get; set; }
 
-        [Display(Name = "CEP")]
         public int Cep { get; set; }
         public string Rua { get; set; }
 
-        [Display(Name = "Número")]
         public int Numero { get; set; }
         public string Complemento { get; set; }
         public string Bairro { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public Osc Osc { get; set; }
+        public int OscId { get; set; }
 
         public ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
         public ICollection<Fornecedor> Fornecedores { get; set; } = new List<Fornecedor>();
