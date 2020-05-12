@@ -18,8 +18,6 @@ namespace Ymagi.Models
         public Fornecedor Fornecedor { get; set; }
         public int FornecedorId { get; set; }
 
-
-
         public Produto()
         {
         }

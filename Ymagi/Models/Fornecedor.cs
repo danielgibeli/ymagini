@@ -18,7 +18,7 @@ namespace Ymagi.Models
 
         public string Endereço { get; set; }
 
-        public int Numero { get; set; }
+        public string Numero { get; set; }
 
         public string Complemento { get; set; }
         public string Bairro { get; set; }
@@ -38,7 +38,7 @@ namespace Ymagi.Models
         }
 
         public Fornecedor(int id, string razaoSocial, string nomeFantasia, string cnpj, 
-            string endereço, int numero, string complemento, string bairro, string cidade, 
+            string endereço, string numero, string complemento, string bairro, string cidade, 
             string estado, string contato, string telefone, string email)
         {
             Id = id;

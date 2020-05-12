@@ -1,4 +1,5 @@
-﻿using System;
+﻿    using System;
+using System.Collections.Generic;
 using Ymagi.Models.Enums;
 
 namespace Ymagi.Models

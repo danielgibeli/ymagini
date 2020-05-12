@@ -10,11 +10,11 @@ namespace Ymagi.Models
         public int Id { get; set; }
         public string Nome { get; set; }
 
-        public int Cpf { get; set; }
+        public string Cpf { get; set; }
 
-        public int Rg { get; set; }
+        public string Rg { get; set; }
 
-        public int Telefone { get; set; }
+        public string Telefone { get; set; }
 
         public string Email { get; set; }
 
@@ -25,14 +25,14 @@ namespace Ymagi.Models
 
         public string EstadoCivil { get; set; }
 
-        public int Filhos { get; set; }
+        public string Filhos { get; set; }
 
         public DateTime DataCadastro { get; set; }
 
-        public int Cep { get; set; }
-        public string Rua { get; set; }
+        public string Cep { get; set; }
+        public string Endereco { get; set; }
 
-        public int Numero { get; set; }
+        public string Numero { get; set; }
         public string Complemento { get; set; }
         public string Bairro { get; set; }
         public string Cidade { get; set; }
@@ -50,8 +50,8 @@ namespace Ymagi.Models
         {
         }
 
-        public Membro(int id, string nome, int cpf, int rg, int telefone, string email, DateTime nascimento, 
-            string sexo, string estadoCivil, int filhos, DateTime dataCadastro, int cep, string rua, int numero, 
+        public Membro(int id, string nome, string cpf, string rg, string telefone, string email, DateTime nascimento, 
+            string sexo, string estadoCivil, string filhos, DateTime dataCadastro, string cep, string endereco, string numero, 
             string complemento, string bairro, string cidade, string estado, Osc osc)
         {
             Id = id;
@@ -66,7 +66,7 @@ namespace Ymagi.Models
             Filhos = filhos;
             DataCadastro = dataCadastro;
             Cep = cep;
-            Rua = rua;
+            Endereco = endereco;
             Numero = numero;
             Complemento = complemento;
             Bairro = bairro;

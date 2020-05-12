@@ -17,7 +17,6 @@ namespace Ymagi.Models
         public int UsuarioId { get; set; }
         public int MembroId { get; set; }
         public int FornecedorId { get; set; }
-
         public DoacoesStatus Status { get; set; }
 
         public Recebimento()

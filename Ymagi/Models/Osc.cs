@@ -29,11 +29,13 @@ namespace Ymagi.Models
         [DataType(DataType.PhoneNumber)]
         public string Telefone { get; set; }
 
-        [Display(Name = "Endereço: Rua, Avenida, etc...")]
+        public string Cep { get; set; }
+
+        [Display(Name = "Endereço: Endereco, Avenida, etc...")]
         public string Endereço { get; set; }
 
         [Display(Name = "Número")]
-        public int Numero { get; set; }
+        public string Numero { get; set; }
 
         public string Complemento { get; set; }
         public string Bairro { get; set; }
@@ -53,7 +55,7 @@ namespace Ymagi.Models
         }
 
         public Osc(int id, string razaoSocial, string nome, string cnpj, string responsavel,
-            string email, string telefone, string endereço, int numero, string complemento,
+            string email, string telefone, string cep, string endereço, string numero, string complemento,
             string bairro, string cidade, string estado, string contato, string observacao)
         {
             Id = id;
@@ -64,6 +66,7 @@ namespace Ymagi.Models
             Email = email;
             Telefone = telefone;
             Endereço = endereço;
+            Cep = cep;
             Numero = numero;
             Complemento = complemento;
             Bairro = bairro;
