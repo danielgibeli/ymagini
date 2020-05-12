@@ -10,6 +10,7 @@ namespace Ymagi.Models.ViewModels
         public Membro Membro { get; set; }
         public Usuario Usuario { get; set; }
         public Fornecedor Fornecedor { get; set; }
+        public Osc Osc { get; set; }
 
         public ICollection<Osc> Oscs { get; set; }
         public ICollection<Membro> Membros { get; set; }

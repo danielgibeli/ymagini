@@ -1,11 +1,5 @@
 ﻿@model Ymagi.Models.Usuario
 
-@{
-    ViewData["Title"] = "Delete";
-}
-
-<h2>Delete</h2>
-
 <h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Usuario</h4>
@@ -112,6 +106,18 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Membro)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Membro.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Osc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Osc.Id)
         </dd>
     </dl>
     

@@ -1,11 +1,5 @@
 ﻿@model Ymagi.Models.Usuario
 
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h2>Details</h2>
-
 <div>
     <h4>Usuario</h4>
     <hr />
@@ -111,6 +105,18 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Membro)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Membro.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Osc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Osc.Id)
         </dd>
     </dl>
 </div>

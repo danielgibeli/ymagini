@@ -1,11 +1,5 @@
 ﻿@model Ymagi.Models.Usuario
 
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h2>Edit</h2>
-
 <h4>Usuario</h4>
 <hr />
 <div class="row">
@@ -97,6 +91,16 @@
                 <label asp-for="Estado" class="control-label"></label>
                 <input asp-for="Estado" class="form-control" />
                 <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MembroId" class="control-label"></label>
+                <select asp-for="MembroId" class="form-control" asp-items="ViewBag.MembroId"></select>
+                <span asp-validation-for="MembroId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OscId" class="control-label"></label>
+                <select asp-for="OscId" class="form-control" asp-items="ViewBag.OscId"></select>
+                <span asp-validation-for="OscId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

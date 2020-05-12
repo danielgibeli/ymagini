@@ -6,19 +6,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ymagi.Models;
+using Ymagi.Models.ViewModels;
+using Ymagi.Services;
 
 namespace Ymagi.Controllers
 {
     public class MembrosController : Controller
     {
         private readonly YmagiContext _context;
+        private readonly OscService _oscService;
 
-        public MembrosController(YmagiContext context)
+        public MembrosController(YmagiContext context, OscService oscService)
         {
             _context = context;
+            _oscService = oscService;
         }
 
-        // GET: Membros
+        // GET: Membros 
+        public async Task<Membro> FindByIdAsync(int id)
+        {
+            return await _context.Membro.Include(obj => obj.Osc).FirstOrDefaultAsync(obj => obj.Id == id);
+        }
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Membro.ToListAsync());
@@ -43,9 +52,11 @@ namespace Ymagi.Controllers
         }
 
         // GET: Membros/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var oscs = await _oscService.FindAllAsync();
+            var viewModel = new MembroViewModel { Oscs = oscs };
+            return View(viewModel);
         }
 
         // POST: Membros/Create
@@ -62,7 +73,10 @@ namespace Ymagi.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(membro);
+
+
         }
+
 
         // GET: Membros/Edit/5
         public async Task<IActionResult> Edit(int? id)

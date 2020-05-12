@@ -37,7 +37,7 @@ namespace Ymagi.Data
                 "Holanda", 1054, "m", "vl mariana", "ribeirao", "SP", osc1);
 
             Usuario us1 = new Usuario(1, "Daniel", 123456, 123456, 25487, "daniel@gmail", new DateTime(1980, 05, 03), 
-                "Masc", "Casado", 2, new DateTime(2020, 09, 05), 14075210, "Guiana", 450, "34m", "Vl Mariana", "Ribs", "SP");
+                "Masc", "Casado", 2, new DateTime(2020, 09, 05), 14075210, "Guiana", 450, "34m", "Vl Mariana", "Ribs", "SP",mem1, osc1);
 
 
             Fornecedor for1 = new Fornecedor(1, "Ymagi Gestao Ltda", "Ymagi", "123456789", "Holanda", 
