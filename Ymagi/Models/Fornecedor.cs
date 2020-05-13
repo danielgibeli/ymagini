@@ -27,8 +27,6 @@ namespace Ymagi.Models
         public string Contato { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
-        public Membro Membro { get; set; }
-        public int MembroId { get; set; }
 
 
         public ICollection<Produto> Produtos { get; set; } = new List<Produto>();

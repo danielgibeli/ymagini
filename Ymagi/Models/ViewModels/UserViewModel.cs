@@ -7,8 +7,9 @@ namespace Ymagi.Models.ViewModels
 {
     public class UserViewModel
     {
-        public Usuario Usuario { get; set; }
+        public Usuario Usuarios { get; set; }
 
-        public ICollection<Membro> Membros { get; set; }
+        public ICollection<Membro> Membro { get; set; }
+
     }
 }

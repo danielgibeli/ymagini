@@ -50,6 +50,8 @@ namespace Ymagi
 
             services.AddScoped<SeedingService>();
             services.AddScoped<OscService>();
+            services.AddScoped<MembroService>();
+            services.AddScoped<UsuarioService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,11 +15,13 @@ namespace Ymagi.Controllers
     {
         private readonly YmagiContext _context;
         private readonly OscService _oscService;
+        private readonly MembroService _membroService;
 
-        public MembrosController(YmagiContext context, OscService oscService)
+        public MembrosController(YmagiContext context, OscService oscService, MembroService membroService)
         {
             _context = context;
             _oscService = oscService;
+            _membroService = membroService;
         }
 
         // GET: Membros 
@@ -64,17 +66,18 @@ namespace Ymagi.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Rg,Telefone,Email,Nascimento,Sexo,EstadoCivil,Filhos,DataCadastro,Cep,Endereco,Numero,Complemento,Bairro,Cidade,Estado")] Membro membro)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Rg,Telefone,Email,Nascimento,Sexo,EstadoCivil," +
+            "Filhos,DataCadastro,Cep,Endereco,Numero,Complemento,Bairro,Cidade,Estado")] Membro membro)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(membro);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var osc = await _oscService.FindAllAsync();
+                var viewModel = new MembroViewModel { Membro = membro, Oscs = osc };
+                return View(viewModel);
             }
-            return View(membro);
 
-
+            await _membroService.InsertAsync(membro);
+            return RedirectToAction(nameof(Index));
         }
 
 

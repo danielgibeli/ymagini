@@ -7,18 +7,18 @@ using Ymagi.Models;
 
 namespace Ymagi.Services
 {
-    public class OscService
+    public class UsuarioService
     {
         private readonly YmagiContext _context;
 
-        public OscService(YmagiContext context)
+        public UsuarioService(YmagiContext context)
         {
             _context = context;
         }
 
-        public async Task<List<Osc>> FindAllAsync()
+        public async Task<List<Usuario>> FindAllAsync()
         {
-            return await _context.Osc.OrderBy(x => x.Nome).ToListAsync();
+            return await _context.Usuario.OrderBy(x => x.Nome).ToListAsync();
         }
-            }
+    }
 }

@@ -1,97 +1,102 @@
 ﻿@model Ymagi.Models.ViewModels.UserViewModel;
 
-<h4>Usuario</h4>
+<h4>Usuarios</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Usuario.Nome" class="control-label"></label>
-                <input asp-for="Usuario.Nome" class="form-control" />
-                <span asp-validation-for="Usuario.Nome" class="text-danger"></span>
+                <label asp-for="Usuarios.MembroId" class="control-label"></label>
+                <select asp-for="Usuarios.MembroId" asp-items="@(new SelectList(Model.Membro,"Id","Nome"))"
+                        class="form-control text-success"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Cpf" class="control-label"></label>
-                <input asp-for="Usuario.Cpf" class="form-control" />
-                <span asp-validation-for="Usuario.Cpf" class="text-danger"></span>
+                <label asp-for="Usuarios.Nome" class="control-label"></label>
+                <input asp-for="Usuarios.Nome" class="form-control" />
+                <span asp-validation-for="Usuarios.Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Rg" class="control-label"></label>
-                <input asp-for="Usuario.Rg" class="form-control" />
-                <span asp-validation-for="Usuario.Rg" class="text-danger"></span>
+                <label asp-for="Usuarios.Cpf" class="control-label"></label>
+                <input asp-for="Usuarios.Cpf" class="form-control" />
+                <span asp-validation-for="Usuarios.Cpf" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Telefone" class="control-label"></label>
-                <input asp-for="Usuario.Telefone" class="form-control" />
-                <span asp-validation-for="Usuario.Telefone" class="text-danger"></span>
+                <label asp-for="Usuarios.Rg" class="control-label"></label>
+                <input asp-for="Usuarios.Rg" class="form-control" />
+                <span asp-validation-for="Usuarios.Rg" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Email" class="control-label"></label>
-                <input asp-for="Usuario.Email" class="form-control" />
-                <span asp-validation-for="Usuario.Email" class="text-danger"></span>
+                <label asp-for="Usuarios.Telefone" class="control-label"></label>
+                <input asp-for="Usuarios.Telefone" class="form-control" />
+                <span asp-validation-for="Usuarios.Telefone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Nascimento" class="control-label"></label>
-                <input asp-for="Usuario.Nascimento" class="form-control" />
-                <span asp-validation-for="Usuario.Nascimento" class="text-danger"></span>
+                <label asp-for="Usuarios.Email" class="control-label"></label>
+                <input asp-for="Usuarios.Email" class="form-control" />
+                <span asp-validation-for="Usuarios.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Sexo" class="control-label"></label>
-                <input asp-for="Usuario.Sexo" class="form-control" />
-                <span asp-validation-for="Usuario.Sexo" class="text-danger"></span>
+                <label asp-for="Usuarios.Nascimento" class="control-label"></label>
+                <input asp-for="Usuarios.Nascimento" class="form-control" />
+                <span asp-validation-for="Usuarios.Nascimento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.EstadoCivil" class="control-label"></label>
-                <input asp-for="Usuario.EstadoCivil" class="form-control" />
-                <span asp-validation-for="Usuario.EstadoCivil" class="text-danger"></span>
+                <label asp-for="Usuarios.Sexo" class="control-label"></label>
+                <input asp-for="Usuarios.Sexo" class="form-control" />
+                <span asp-validation-for="Usuarios.Sexo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Filhos" class="control-label"></label>
-                <input asp-for="Usuario.Filhos" class="form-control" />
-                <span asp-validation-for="Usuario.Filhos" class="text-danger"></span>
+                <label asp-for="Usuarios.EstadoCivil" class="control-label"></label>
+                <input asp-for="Usuarios.EstadoCivil" class="form-control" />
+                <span asp-validation-for="Usuarios.EstadoCivil" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.DataCadastro" class="control-label"></label>
-                <input asp-for="Usuario.DataCadastro" class="form-control" />
-                <span asp-validation-for="Usuario.DataCadastro" class="text-danger"></span>
+                <label asp-for="Usuarios.Filhos" class="control-label"></label>
+                <input asp-for="Usuarios.Filhos" class="form-control" />
+                <span asp-validation-for="Usuarios.Filhos" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Cep" class="control-label"></label>
-                <input asp-for="Usuario.Cep" class="form-control" />
-                <span asp-validation-for="Usuario.Cep" class="text-danger"></span>
+                <label asp-for="Usuarios.DataCadastro" class="control-label"></label>
+                <input asp-for="Usuarios.DataCadastro" class="form-control" />
+                <span asp-validation-for="Usuarios.DataCadastro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Endereco" class="control-label"></label>
-                <input asp-for="Usuario.Endereco" class="form-control" />
-                <span asp-validation-for="Usuario.Endereco" class="text-danger"></span>
+                <label asp-for="Usuarios.Cep" class="control-label"></label>
+                <input asp-for="Usuarios.Cep" class="form-control" />
+                <span asp-validation-for="Usuarios.Cep" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Numero" class="control-label"></label>
-                <input asp-for="Usuario.Numero" class="form-control" />
-                <span asp-validation-for="Usuario.Numero" class="text-danger"></span>
+                <label asp-for="Usuarios.Endereco" class="control-label"></label>
+                <input asp-for="Usuarios.Endereco" class="form-control" />
+                <span asp-validation-for="Usuarios.Endereco" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Complemento" class="control-label"></label>
-                <input asp-for="Usuario.Complemento" class="form-control" />
-                <span asp-validation-for="Usuario.Complemento" class="text-danger"></span>
+                <label asp-for="Usuarios.Numero" class="control-label"></label>
+                <input asp-for="Usuarios.Numero" class="form-control" />
+                <span asp-validation-for="Usuarios.Numero" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Bairro" class="control-label"></label>
-                <input asp-for="Usuario.Bairro" class="form-control" />
-                <span asp-validation-for="Usuario.Bairro" class="text-danger"></span>
+                <label asp-for="Usuarios.Complemento" class="control-label"></label>
+                <input asp-for="Usuarios.Complemento" class="form-control" />
+                <span asp-validation-for="Usuarios.Complemento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Cidade" class="control-label"></label>
-                <input asp-for="Usuario.Cidade" class="form-control" />
-                <span asp-validation-for="Usuario.Cidade" class="text-danger"></span>
+                <label asp-for="Usuarios.Bairro" class="control-label"></label>
+                <input asp-for="Usuarios.Bairro" class="form-control" />
+                <span asp-validation-for="Usuarios.Bairro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Usuario.Estado" class="control-label"></label>
-                <input asp-for="Usuario.Estado" class="form-control" />
-                <span asp-validation-for="Usuario.Estado" class="text-danger"></span>
+                <label asp-for="Usuarios.Cidade" class="control-label"></label>
+                <input asp-for="Usuarios.Cidade" class="form-control" />
+                <span asp-validation-for="Usuarios.Cidade" class="text-danger"></span>
             </div>
-           
+            <div class="form-group">
+                <label asp-for="Usuarios.Estado" class="control-label"></label>
+                <input asp-for="Usuarios.Estado" class="form-control" />
+                <span asp-validation-for="Usuarios.Estado" class="text-danger"></span>
+            </div>
+
         </form>
     </div>
 </div>
