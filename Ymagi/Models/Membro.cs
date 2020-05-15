@@ -41,6 +41,7 @@ namespace Ymagi.Models
         public int OscId { get; set; }
 
         public ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
+
         public ICollection<Fornecedor> Fornecedores { get; set; } = new List<Fornecedor>();
         public ICollection<Produto> Produtos { get; set; } = new List<Produto>();
         public ICollection<Entrega> Entregas { get; set; } = new List<Entrega>();
@@ -73,6 +74,16 @@ namespace Ymagi.Models
             Cidade = cidade;
             Estado = estado;
             Osc = osc;
+        }
+
+        public void AddUsuario(Usuario usuario)
+        {
+            Usuarios.Add(usuario);
+        }
+
+        public void RemUsuario(Usuario usuario)
+        {
+            Usuarios.Remove(usuario);
         }
 
         public void AddFornecedor(Fornecedor fornecedor)

@@ -49,7 +49,7 @@ namespace Ymagi.Data
 
             Recebimento rec = new Recebimento(1, new DateTime(2020, 09, 05), 200, us1, mem1,for1,1,2,1, Models.Enums.DoacoesStatus.Efetivada);
 
-            _context.Osc.AddRange(osc1);
+            _context.Osc.AddRange(osc1);        
             _context.Membro.AddRange(mem1);
             _context.Usuario.AddRange(us1);
             _context.Fornecedor.AddRange(for1);

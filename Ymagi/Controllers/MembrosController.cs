@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Ymagi.Models;
 using Ymagi.Models.ViewModels;
 using Ymagi.Services;
+using Ymagi.Services.Exception;
 
 namespace Ymagi.Controllers
 {
@@ -24,36 +26,12 @@ namespace Ymagi.Controllers
             _membroService = membroService;
         }
 
-        // GET: Membros 
-        public async Task<Membro> FindByIdAsync(int id)
-        {
-            return await _context.Membro.Include(obj => obj.Osc).FirstOrDefaultAsync(obj => obj.Id == id);
-        }
-
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Membro.ToListAsync());
+            var list = await _membroService.FindAllAsync();
+            return View(list);
         }
 
-        // GET: Membros/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var membro = await _context.Membro
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (membro == null)
-            {
-                return NotFound();
-            }
-
-            return View(membro);
-        }
-
-        // GET: Membros/Create
         public async Task<IActionResult> Create()
         {
             var oscs = await _oscService.FindAllAsync();
@@ -61,109 +39,118 @@ namespace Ymagi.Controllers
             return View(viewModel);
         }
 
-        // POST: Membros/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Rg,Telefone,Email,Nascimento,Sexo,EstadoCivil," +
-            "Filhos,DataCadastro,Cep,Endereco,Numero,Complemento,Bairro,Cidade,Estado")] Membro membro)
+        public async Task<IActionResult> Create(Membro membro)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var osc = await _oscService.FindAllAsync();
-                var viewModel = new MembroViewModel { Membro = membro, Oscs = osc };
+                var oscs = await _oscService.FindAllAsync();
+                var viewModel = new MembroViewModel { Membro = membro, Oscs = oscs };
                 return View(viewModel);
             }
-
             await _membroService.InsertAsync(membro);
             return RedirectToAction(nameof(Index));
         }
 
-
-        // GET: Membros/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var membro = await _context.Membro.FindAsync(id);
-            if (membro == null)
-            {
-                return NotFound();
-            }
-            return View(membro);
-        }
-
-        // POST: Membros/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Cpf,Rg,Telefone,Email,Nascimento,Sexo,EstadoCivil,Filhos,DataCadastro,Cep,Endereco,Numero,Complemento,Bairro,Cidade,Estado")] Membro membro)
-        {
-            if (id != membro.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(membro);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MembroExists(membro.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(membro);
-        }
-
-        // GET: Membros/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
-            var membro = await _context.Membro
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (membro == null)
+            var obj = await _membroService.FindByIdAsync(id.Value);
+            if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
-            return View(membro);
+            return View(obj);
         }
 
-        // POST: Membros/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var membro = await _context.Membro.FindAsync(id);
-            _context.Membro.Remove(membro);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _membroService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
-        private bool MembroExists(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return _context.Membro.Any(e => e.Id == id);
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+
+            var obj = await _membroService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
+
+            return View(obj);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+
+            var obj = await _membroService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
+
+            List<Osc> oscs = await _oscService.FindAllAsync();
+            MembroViewModel viewModel = new MembroViewModel { Membro = obj, Oscs = oscs };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Membro membro)
+        {
+            if (!ModelState.IsValid)
+            {
+                var oscs = await _oscService.FindAllAsync();
+                var viewModel = new MembroViewModel { Membro = membro, Oscs = oscs };
+                return View(viewModel);
+            }
+            if (id != membro.Id)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
+            }
+            try
+            {
+                await _membroService.UpdateAsync(membro);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
+        }
+            
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }

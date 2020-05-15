@@ -19,7 +19,7 @@ namespace Ymagi.Services
 
         public async Task<List<Membro>> FindAllAsync()
         {
-            return await _context.Membro.OrderBy(x => x.Nome).ToListAsync();
+            return await _context.Membro.ToListAsync();
         }
 
         public async Task InsertAsync(Membro obj)
@@ -43,7 +43,7 @@ namespace Ymagi.Services
             }
             catch (DbUpdateException e)
             {
-                throw new IntegrityException(e.Message);
+                throw new IntegrityException(e.Message  );
             }
         }
 

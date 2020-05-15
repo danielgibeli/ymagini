@@ -1,152 +1,157 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ymagi.Models;
+using Ymagi.Models.ViewModels;
+using Ymagi.Services;
+using Ymagi.Services.Exception;
 
 namespace Ymagi.Controllers
 {
     public class UsuariosController : Controller
     {
         private readonly YmagiContext _context;
+        private readonly MembroService _membroService;
+        private readonly UsuarioService _usuarioService;
 
-        public UsuariosController(YmagiContext context)
+        public UsuariosController(YmagiContext context, MembroService membroService, UsuarioService usuarioService)
         {
             _context = context;
+            _membroService = membroService;
+            _usuarioService = usuarioService;
+
         }
 
-        // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuario.ToListAsync());
+            var list = await _usuarioService.FindAllAsync();
+            return View(list);
         }
 
-        // GET: Usuarios/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Create()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-
-            return View(usuario);
+            var membros = await _membroService.FindAllAsync();
+            var viewModel = new UserViewModel { Membros = membros };
+            return View(viewModel);
         }
 
-        // GET: Usuarios/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Usuarios/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Rg,Telefone,Email,Nascimento,Sexo,EstadoCivil,Filhos,DataCadastro,Cep,Endereco,Numero,Complemento,Bairro,Cidade,Estado")] Usuario usuario)
+        public async Task<IActionResult> Create(Usuario usuario)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var membros = await _membroService.FindAllAsync();
+                var viewModel = new UserViewModel { Usuario = usuario, Membros = membros };
+                return View(viewModel);
             }
-            return View(usuario);
+            await _usuarioService.InsertAsync(usuario);
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Usuarios/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuario = await _context.Usuario.FindAsync(id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-            return View(usuario);
-        }
-
-        // POST: Usuarios/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Cpf,Rg,Telefone,Email,Nascimento,Sexo,EstadoCivil,Filhos,DataCadastro,Cep,Endereco,Numero,Complemento,Bairro,Cidade,Estado")] Usuario usuario)
-        {
-            if (id != usuario.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(usuario);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UsuarioExists(usuario.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(usuario);
-        }
-
-        // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
-            var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
+            var obj = await _membroService.FindByIdAsync(id.Value);
+            if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
-            return View(usuario);
+            return View(obj);
         }
 
-        // POST: Usuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-            _context.Usuario.Remove(usuario);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _usuarioService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
-        private bool UsuarioExists(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+
+            var obj = await _usuarioService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
+
+            return View(obj);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+
+            var obj = await _usuarioService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
+
+            List<Membro> membros = await _membroService.FindAllAsync();
+            UserViewModel viewModel = new UserViewModel { Usuario = obj, Membros = membros };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Usuario usuario)
+        {
+            if (!ModelState.IsValid)
+            {
+                var membro = await _membroService.FindAllAsync();
+                var viewModel = new UserViewModel { Usuario = usuario, Membros = membro };
+                return View(viewModel);
+            }
+            if (id != usuario.Id)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
+            }
+            try
+            {
+                await _usuarioService.UpdateAsync(usuario);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }

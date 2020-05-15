@@ -19,7 +19,6 @@ namespace Ymagi.Models
 
         public string Email { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
 
         public string Sexo { get; set; }
@@ -41,6 +40,7 @@ namespace Ymagi.Models
         public string Estado { get; set; }
         public Membro Membro { get; set; }
         public int MembroId { get; set; }
+
 
         public ICollection<Entrega> Entregas { get; set; } = new List<Entrega>();
         public ICollection<Recebimento> Recebimentos { get; set; } = new List<Recebimento>();
