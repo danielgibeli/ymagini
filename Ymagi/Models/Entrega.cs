@@ -8,27 +8,36 @@ namespace Ymagi.Models
     {
         public int Id { get; set; }
         public DateTime Data { get; set; }
-        public double Total { get; set; }
+        public Produto Produto { get; set; }
+        public double Quantidade { get; set; }
+        public double ValorUnit { get; set; }
+        public double ValorTotal { get; set; }
         public Usuario Usuario { get; set; }
         public Membro Membro { get; set; }
+        public DoacoesStatus Status { get; set; }
+
+        public int ProdutoId { get; set; }
         public int UsuarioId { get; set; }
         public int MembroId { get; set; }
-        public DoacoesStatus Status { get; set; }
+
+
 
         public Entrega()
         {
         }
 
-        public Entrega(int id, DateTime data, double total,
-        Usuario usuario, Membro membro, int usuarioId, int membroId, DoacoesStatus status)
+        public Entrega(int id, DateTime data, Produto produto, double quantidade, 
+            double valorUnit, double valorTotal, Usuario usuario, 
+            Membro membro, DoacoesStatus status)
         {
             Id = id;
             Data = data;
-            Total = total;
+            Produto = produto;
+            Quantidade = quantidade;
+            ValorUnit = valorUnit;
+            ValorTotal = valorTotal;
             Usuario = usuario;
             Membro = membro;
-            UsuarioId = usuarioId;
-            MembroId = membroId;
             Status = status;
         }
     }

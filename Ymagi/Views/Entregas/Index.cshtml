@@ -16,10 +16,25 @@
                 @Html.DisplayNameFor(model => model.Data)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Produto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorTotal)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Usuario)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Membro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th></th>
         </tr>
@@ -31,10 +46,25 @@
                 @Html.DisplayFor(modelItem => item.Data)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Usuario)
+                @Html.DisplayFor(modelItem => item.Produto.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Membro)
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Membro.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

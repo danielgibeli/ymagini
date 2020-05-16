@@ -129,12 +129,12 @@ namespace Ymagi.Models
 
         public double TotalEntregasMembros(DateTime inicial, DateTime final)
         {
-            return Entregas.Where(ent => ent.Data >= inicial && ent.Data <= final).Sum(ent => ent.Total);
+            return Entregas.Where(ent => ent.Data >= inicial && ent.Data <= final).Sum(ent => ent.ValorTotal);
         }
 
         public double TotalRecebimentosMembros(DateTime inicial, DateTime final)
         {
-            return Recebimentos.Where(rec => rec.Data >= inicial && rec.Data <= final).Sum(rec => rec.Total);
+            return Recebimentos.Where(rec => rec.Data >= inicial && rec.Data <= final).Sum(rec => rec.ValorTotal);
         }
     }
 }

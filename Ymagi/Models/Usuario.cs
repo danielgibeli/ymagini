@@ -42,6 +42,7 @@ namespace Ymagi.Models
         public int MembroId { get; set; }
 
 
+        public ICollection<Produto> Produtos { get; set; } = new List<Produto>();
         public ICollection<Entrega> Entregas { get; set; } = new List<Entrega>();
         public ICollection<Recebimento> Recebimentos { get; set; } = new List<Recebimento>();
 

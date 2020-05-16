@@ -13,7 +13,19 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorTotal)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Membro)
@@ -22,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.Fornecedor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Usuario)
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th></th>
         </tr>
@@ -31,16 +43,28 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorTotal)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Data)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Membro)
+                @Html.DisplayFor(modelItem => item.Usuario.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fornecedor)
+                @Html.DisplayFor(modelItem => item.Membro.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Usuario)
+                @Html.DisplayFor(modelItem => item.Fornecedor.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
