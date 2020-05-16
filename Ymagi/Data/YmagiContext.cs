@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ymagi.Models
 {
-    public class YmagiContext : DbContext
+    public class YmagiContext : IdentityDbContext
     {
         public YmagiContext (DbContextOptions<YmagiContext> options)
             : base(options)
